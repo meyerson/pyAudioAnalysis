@@ -804,9 +804,9 @@ def speaker_diarization(filename, n_speakers, mid_window=2.0, mid_step=0.2,
         - filename:        the name of the WAV file to be analyzed
         - n_speakers       the number of speakers (clusters) in
                            the recording (<=0 for unknown)
-        - mid_window (opt)    mid-term window size
+        - mid_window (opt)    mid-term window size in seconds
         - mid_step (opt)    mid-term window step
-        - short_window  (opt)    short-term window size
+        - short_window  (opt)    short-term window size in seconds
         - lda_dim (opt     LDA dimension (0 for no LDA)
         - plot_res         (opt)   0 for not plotting the results 1 for plotting
     """
@@ -877,6 +877,7 @@ def speaker_diarization(filename, n_speakers, mid_window=2.0, mid_step=0.2,
         step_ratio = int(round(short_window / short_window))
         mt_feats_to_red = []
         num_of_features = len(st_feats)
+        print(num_of_features)
         num_of_stats = 2
         for index in range(num_of_stats * num_of_features):
             mt_feats_to_red.append([])
@@ -1041,6 +1042,7 @@ def speaker_diarization(filename, n_speakers, mid_window=2.0, mid_step=0.2,
             plt.title("Cluster purity: {0:.1f}% - "
                       "Speaker purity: {1:.1f}%".format(100 * purity_cluster_m,
                                                         100 * purity_speaker_m))
+
     if plot_res:
         plt.xlabel("time (seconds)")
         if n_speakers <= 0:
